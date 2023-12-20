@@ -8,7 +8,7 @@ function Keypad({ onButtonClick }) {
     "C",
     "delete",
     "%",
-    "÷",
+    "/",
     "7",
     "8",
     "9",
@@ -59,7 +59,7 @@ function Keypad({ onButtonClick }) {
           />
         </button>
       );
-    } else if (btn === "÷") {
+    } else if (btn === "/") {
       // Render the "÷" symbol for the "/" button
       return (
         <button

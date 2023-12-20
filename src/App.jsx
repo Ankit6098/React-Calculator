@@ -6,7 +6,7 @@ import iphone from "./assets/capture.png";
 
 function App() {
   const [displayValue, setDisplayValue] = useState("0");
-
+  
   const handleButtonClick = (buttonValue) => {
     // Update the displayValue in the state based on the button click
     if (buttonValue === "C") {
@@ -27,25 +27,45 @@ function App() {
       return;
     } else if (buttonValue === "=") {
       // If "=" is clicked, calculate the result
-      const result = eval(displayValue);
-      // Update the displayValue with the result
-      setDisplayValue(result.toString());
-      return;
-    } else {
-      // Otherwise, update the displayValue based on the button click
-      if (displayValue === "0") {
-        console.log(buttonValue);
-        setDisplayValue(buttonValue);
-        return;
-      } else if (displayValue === "x") {
-        // If the displayValue is "*", replace it with the "x" symbol
-        setDisplayValue("x");
-        return;
+      try {
+        const result = eval(displayValue);
+        // Check for division by zero
+        if (!isFinite(result) || isNaN(result)) {
+          throw new Error("Cannot divide by zero");
+        }
+        // Update the displayValue with the result
+        setDisplayValue(result.toString());
+      } catch (error) {
+        // Handle errors, e.g., division by zero
+        setDisplayValue("Error");
+        console.error(error.message);
       }
-      // If the displayValue is not "0", append the buttonValue to it
+      return;
+    } else if (buttonValue === "+" || buttonValue === "-" || buttonValue === "*" || buttonValue === "/") {
+      // If an operator is clicked, check for special cases
+      const lastChar = displayValue[displayValue.length - 1];
+      if (lastChar === "+" || lastChar === "-" || lastChar === "*" || lastChar === "/") {
+        // If the last character is an operator, replace it with the new operator
+        setDisplayValue((prevDisplayValue) =>
+          prevDisplayValue.substring(0, prevDisplayValue.length - 1) + buttonValue
+        );
+      } else {
+        // Otherwise, append the operator to the displayValue
+        setDisplayValue((prevDisplayValue) => prevDisplayValue + buttonValue);
+      }
+    } else if (buttonValue === "0" && displayValue === "0") {
+      // If the current display value is "0" and the user enters another "0", do nothing
+      return;
+    } else if (displayValue === "0" && /[1-9]/.test(buttonValue)) {
+      // If the current display value is "0" and the user enters a digit, replace "0" with the digit
+      setDisplayValue(buttonValue);
+    } else {
+      // For other buttons, update the displayValue based on the button click
       setDisplayValue((prevDisplayValue) => prevDisplayValue + buttonValue);
     }
   };
+  
+  
 
   return (
     <div className="App">
