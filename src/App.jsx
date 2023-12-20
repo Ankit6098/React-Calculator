@@ -2,7 +2,7 @@ import { useState } from "react";
 import CalculatorDisplay from "./components/Display";
 import CalculatorKeypad from "./components/Keypad";
 import "./styles/index.css";
-import img from "./assets/Capture.png";
+import iphone from "./assets/capture.png";
 
 function App() {
   const [displayValue, setDisplayValue] = useState("0");
@@ -49,7 +49,7 @@ function App() {
 
   return (
     <div className="App">
-      <img src={img} alt="iphone" className="iphone" />
+      <img src={iphone} alt="iphone" className="iphone" />
       <div className="display-keypad-container">
         <CalculatorDisplay value={displayValue} />
         <CalculatorKeypad onButtonClick={handleButtonClick} />
