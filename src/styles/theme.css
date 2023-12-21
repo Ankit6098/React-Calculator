@@ -1,0 +1,16 @@
+.theme-button-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.theme-button-container img {
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}

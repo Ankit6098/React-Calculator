@@ -2,8 +2,11 @@ import PropTypes from "prop-types";
 import "../styles/keypad.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDeleteLeft } from "@fortawesome/free-solid-svg-icons";
+import { useContext } from "react";
+import { ThemeContext } from "../App.jsx";
 
 function Keypad({ onButtonClick }) {
+  const { isDarkTheme } = useContext(ThemeContext);
   const buttons = [
     "C",
     "delete",
@@ -126,7 +129,11 @@ function Keypad({ onButtonClick }) {
   };
 
   return (
-    <div className="calculator-keypad">
+    <div
+      className={`calculator-keypad ${
+        isDarkTheme ? "light-theme" : "dark-theme"
+      }`}
+    >
       <div className="calculator-keypad-inner">
         <div className="custom-shape-divider-top-1703069621">
           <svg

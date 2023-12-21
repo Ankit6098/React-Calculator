@@ -10,6 +10,7 @@
   border-radius: 20px 20px 0px 0px;
   background-color: #dfe3f8;
   z-index: -1;
+  transition: all 0.5s ease-in-out;
 }
 
 .calculator-display-input {
@@ -30,4 +31,8 @@
 
 .calculator-display-input:focus {
   outline: none;
+}
+
+.calculator-display.dark-theme {
+  background-color: #313233;
 }
